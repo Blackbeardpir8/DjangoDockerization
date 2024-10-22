@@ -1,11 +1,19 @@
-version: '3.8'
+name: my-docker-project
 
 services:
-  app:
-    image: my-docker-image
-    container_name: my-docker-container
+  postgres:
+    image: postgres 
+    container_name: my-postgres-container
     ports:
-      - "8001:8000"
-    volumes:
-      - .:/app
+      - "5432:5432"
+    
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    restart: unless-stopped
+    volumes: 
+      - postgres_data:/var/lib/postgresql/postgres_data
 
+volumes:
+  postgres_data:
